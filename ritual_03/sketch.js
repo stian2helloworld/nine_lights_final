@@ -36,18 +36,18 @@ let finalRightBtnX, finalRightBtnY, finalRightBtnW, finalRightBtnH;
 // Preload
 // =====================================================
 function preload() {
-  r3TitleBg  = loadImage("ritual03_images/ritual03_titlepage.jpg");
+  r3TitleBg  = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual03_titlepage.jpg");
 
   // ⭐ NEW — blinking image for title
-  r3TitleBlink = loadImage("ritual03_images/ritual_water_03.png");
+  r3TitleBlink = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual_water_03.png");
 
-  r3InstrBg  = loadImage("ritual03_images/ritual03_instructionpage.jpg");
-  r3ActionBg = loadImage("ritual03_images/ritual03_actionpage.jpg");
+  r3InstrBg  = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual03_instructionpage.jpg");
+  r3ActionBg = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual03_actionpage.jpg");
 
-  pourWaterImg     = loadImage("ritual03_images/pour_water.png");
-  waterDetectedImg = loadImage("ritual03_images/water_detected.png");
+  pourWaterImg     = loadImage("/nine_lights_final/ritual_03/ritual03_images/pour_water.png");
+  waterDetectedImg = loadImage("/nine_lights_final/ritual_03/ritual03_images/water_detected.png");
 
-  finalResultBg = loadImage("ritual03_images/result_final.jpg");
+  finalResultBg = loadImage("/nine_lights_final/ritual_03/ritual03_images/result_final.jpg");
 }
 
 
@@ -58,9 +58,9 @@ function setup() {
   createCanvas(1080, 900);
   imageMode(CORNER);
 
-  r3TransBgVid    = makeVid("ritual03_images/cloud.webm");
-  r3TransFrameVid = makeVid("ritual03_images/transitional_page03.webm");
-  finalDeerVid    = makeVid("ritual03_images/result_deer_motion.webm");
+  r3TransBgVid    = makeVid("/nine_lights_final/ritual_03/ritual03_images/cloud.webm");
+  r3TransFrameVid = makeVid("/nine_lights_final/ritual_03/ritual03_images/transitional_page03.webm");
+  finalDeerVid    = makeVid("/nine_lights_final/ritual_03/ritual03_images/result_deer_motion.webm");
 
   // Bottom invisible button
   bottomBtnW = 300;
@@ -294,7 +294,7 @@ if (
   mouseX > finalLeftBtnX && mouseX < finalLeftBtnX + finalLeftBtnW &&
   mouseY > finalLeftBtnY && mouseY < finalLeftBtnY + finalLeftBtnH
 ) {
-  window.location.href = "../index.html";
+  window.location.href = "/nine_lights_final/index.html";
   return;
 }
 
@@ -303,7 +303,7 @@ if (
   mouseX > finalRightBtnX && mouseX < finalRightBtnX + finalRightBtnW &&
   mouseY > finalRightBtnY && mouseY < finalRightBtnY + finalRightBtnH
 ) {
-  window.location.href = "../ritual_01/index.html";
+  window.location.href = "/nine_lights_final/ritual_01/index.html";
   return;
     }
   }
