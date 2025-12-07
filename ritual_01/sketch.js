@@ -49,14 +49,14 @@ let transIconAngle = 0;
 
 // ===== Preload Assets & Model =====
 function preload() {
-  r1TitleBg = loadImage("ritual01_images/ritual01_first_page.jpg");
-  r1InstrBg = loadImage("ritual01_images/ritual01_instruction.jpg");
+  r1TitleBg = loadImage("nine_lights_final/ritual_01/ritual01_images/ritual01_first_page.jpg");
+  r1InstrBg = loadImage("nine_lights_final/ritual_01/ritual01_images/ritual01_instruction.jpg");
 
-  r1ActionOverlay = loadImage("ritual01_images/ritual01_action.png");
-  makeGestureImg = loadImage("ritual01_images/make_gestue.png");
-  handDetectedImg = loadImage("ritual01_images/hand_detected.png");
-  percentOutsideImg = loadImage("ritual01_images/percent_outside.png");
-  percentBarImg = loadImage("ritual01_images/percent_bar.png");
+  r1ActionOverlay = loadImage("nine_lights_final/ritual_01/ritual01_images/ritual01_action.png");
+  makeGestureImg = loadImage("nine_lights_final/ritual_01/ritual01_images/make_gestue.png");
+  handDetectedImg = loadImage("nine_lights_final/ritual_01/ritual01_images/hand_detected.png");
+  percentOutsideImg = loadImage("nine_lights_final/ritual_01/ritual01_images/percent_outside.png");
+  percentBarImg = loadImage("nine_lights_final/ritual_01/ritual01_images/percent_bar.png");
 
   // Result
   r1ResultBg = loadImage("ritual01_images/ritual01_result.jpg");
@@ -78,28 +78,28 @@ function setup() {
   });
 
   // Create videos (DOM video elements; all hidden, drawn via image())
-  r1TitleVid = createVideo("ritual01_images/ritual_01title.webm");
+  r1TitleVid = createVideo("nine_lights_final/ritual_01/ritual01_images/ritual_01title.webm");
   r1TitleVid.hide();
   r1TitleVid.loop();
 
-  r1InstrVid = createVideo("ritual01_images/ritual01_instructionpage.webm");
+  r1InstrVid = createVideo("nine_lights_final/ritual_01/ritual01_images/ritual01_instructionpage.webm");
   r1InstrVid.hide();
   r1InstrVid.loop();
 
-  r1TransFrameVid = createVideo("ritual01_images/transitional_page01.webm");
+  r1TransFrameVid = createVideo("nine_lights_final/ritual_01/ritual01_images/transitional_page01.webm");
 r1TransFrameVid.hide();
 r1TransFrameVid.loop();
 
-  r1TransBgVid = createVideo("ritual01_images/cloud.webm");
+  r1TransBgVid = createVideo("nine_lights_final/ritual_01/ritual01_images/cloud.webm");
   r1TransBgVid.hide();
   r1TransBgVid.loop();
 
-  r1PatternVid = createVideo("ritual01_images/pattern_ritual01.webm");
+  r1PatternVid = createVideo("nine_lights_final/ritual_01/ritual01_images/pattern_ritual01.webm");
 r1PatternVid.hide();
 r1PatternVid.loop();
 r1PatternVid.speed(0.5); 
 
-  r1DeerVid = createVideo("ritual01_images/deer_motion01.webm");
+  r1DeerVid = createVideo("nine_lights_final/ritual_01/ritual01_images/deer_motion01.webm");
   r1DeerVid.hide();
   r1DeerVid.loop();
 
