@@ -44,15 +44,15 @@ let resultStartTime = 0;
 // =====================================================
 function preload() {
   // 静态背景
-  r3TitleBg  = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual03_titlepage.jpg");
-  r3InstrBg  = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual03_instructionpage.jpg");
-  r3ActionBg = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual03_actionpage.jpg");
-  r3ResultBg = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual03_result.jpg"); // 可选
-  finalResultBg = loadImage("/nine_lights_final/ritual_03/ritual03_images/result_final.jpg");
+  r3TitleBg  = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual_03_titlepage.jpg");
+  r3InstrBg  = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual_03_instructionpage.jpg");
+  r3ActionBg = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual_03_actionpage.jpg");
+  r3ResultBg = loadImage("/nine_lights_final/ritual_03/ritual03_images/ritual_03_result.jpg"); // 可选
+  finalResultBg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/result_final.jpg");
 
   // Action 图标
-  pourWaterImg     = loadImage("/nine_lights_final/ritual_03/ritual03_images/pour_water.png");
-  waterDetectedImg = loadImage("/nine_lights_final/ritual_03/ritual03_images/water_detected.png");
+  pourWaterImg     = loadImage("/nine_lights_final/ritual_03/ritual_03_images/pour_water.png");
+  waterDetectedImg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/water_detected.png");
 }
 
 
@@ -64,20 +64,20 @@ function setup() {
   imageMode(CORNER);
 
   // ---------- Title / Instruction 视频 ----------
-  r3TitleVid = makeVid("/nine_lights_final/ritual_03/ritual03_images/ritual_water_03.webm");
-  r3InstrVid = makeVid("/nine_lights_final/ritual_03/ritual03_images/water_ritual03_instruction.webm");
+  r3TitleVid = makeVid("/nine_lights_final/ritual_03/ritual_03_images/ritual_water_03.webm");
+  r3InstrVid = makeVid("/nine_lights_final/ritual_03/ritual_03_images/water_ritual03_instruction.webm");
 
   // ---------- Transition 视频 ----------
-  r3TransBgVid    = makeVid("/nine_lights_final/ritual_03/ritual03_images/cloud.webm");
-  r3TransFrameVid = makeVid("/nine_lights_final/ritual_03/ritual03_images/transitional_page03.webm");
+  r3TransBgVid    = makeVid("/nine_lights_final/ritual_03/ritual_03_images/cloud.webm");
+  r3TransFrameVid = makeVid("/nine_lights_final/ritual_03/ritual_03_images/transitional_page03.webm");
 
   // ---------- Result 视频 ----------
-  r3PatternVid = makeVid("/nine_lights_final/ritual_03/ritual03_images/pattern_ritual03.webm");
-  r3DeerVid    = makeVid("/nine_lights_final/ritual_03/ritual03_images/deer_motion03.webm");
+  r3PatternVid = makeVid("/nine_lights_final/ritual_03/ritual_03_images/pattern_ritual03.webm");
+  r3DeerVid    = makeVid("/nine_lights_final/ritual_03/ritual_03_images/deer_motion03.webm");
 
   // ---------- Final 视频 ----------
   // 如果你的文件名不叫这个，就自己改掉路径
-  finalDeerVid = makeVid("/nine_lights_final/ritual_03/ritual03_images/result_deer_motion.webm");
+  finalDeerVid = makeVid("/nine_lights_final/ritual_03/ritual_03_images/result_deer_motion.webm");
 
   // Bottom invisible button（Title / Instr 共用）
   bottomBtnW = 300;
