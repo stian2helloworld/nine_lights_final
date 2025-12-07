@@ -199,6 +199,26 @@ function filterHands(handsArr) {
   return [scored[0].hand, scored[1].hand];
 }
 
+// Select 2 hands closest to screen center
+function getDominantHandPair(handsArr) {
+  if (!handsArr || handsArr.length < 2) return null;
+
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  let scoredHands = handsArr.map((hand) => {
+    let wrist = hand.keypoints[0];
+    let dx = wrist.x - centerX;
+    let dy = wrist.y - centerY;
+    let distToCenter = Math.sqrt(dx * dx + dy * dy);
+    return { hand, distToCenter };
+  });
+
+  scoredHands.sort((a, b) => a.distToCenter - b.distToCenter);
+  if (scoredHands.length >= 2) return [scoredHands[0].hand, scoredHands[1].hand];
+  return null;
+}
+
 // Pinky gesture detection (your original logic kept intact)
 function detectPinkyGesture(handsArr) {
   const pair = getDominantHandPair(handsArr);
@@ -420,24 +440,4 @@ else if (appState === "r1_result") {
 }
 
 // ===== Hand Utility Functions =====
-
-// Select 2 hands closest to screen center
-function getDominantHandPair(handsArr) {
-  if (!handsArr || handsArr.length < 2) return null;
-
-  const centerX = width / 2;
-  const centerY = height / 2;
-
-  let scoredHands = handsArr.map((hand) => {
-    let wrist = hand.keypoints[0];
-    let dx = wrist.x - centerX;
-    let dy = wrist.y - centerY;
-    let distToCenter = Math.sqrt(dx * dx + dy * dy);
-    return { hand, distToCenter };
-  });
-
-  scoredHands.sort((a, b) => a.distToCenter - b.distToCenter);
-  if (scoredHands.length >= 2) return [scoredHands[0].hand, scoredHands[1].hand];
-  return null;
-}
 }
