@@ -107,7 +107,7 @@ if (
   mouseX > btnX && mouseX < btnX + btnW &&
   mouseY > btnY && mouseY < btnY + btnH
 ) {
-  window.location.href = "nine_lights_final/ritual_01/index.html";
+  window.location.href = "/nine_lights_final/ritual_01/index.html";
   return;
 }
   }
