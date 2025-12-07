@@ -50,12 +50,10 @@ function draw() {
 }
 
 function drawTitlePage() {
-  image(bgTitle, 0, 0, width, height);
-  image(
-    logoVid,
+  image(logoVid,
     width / 2 - logoVid.width / 2,
-    height / 2 - logoVid.height / 2
-  );
+    height / 2 - logoVid.height / 2)
+  image(bgTitle, 0, 0, width, height);
 }
 
 function drawInstructionPage() {
