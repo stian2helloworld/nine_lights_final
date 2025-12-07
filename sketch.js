@@ -11,19 +11,19 @@ let topBtnX, topBtnY, topBtnW, topBtnH;
 
 function preload() {
   // Title background
-  bgTitle = loadImage("title_page/title.jpg");
+  bgTitle = loadImage("/nine_lights_final/title_page/title.jpg");
 
   // Title video
-  logoVid = createVideo("title_page/title_page-1.webm");
+  logoVid = createVideo("/nine_lights_final/title_page/title_page-1.webm");
   logoVid.hide();
   logoVid.volume(0);
   logoVid.attribute("muted", "");   // ⭐ 必须加！！！
 
   // Instruction background
-  instructionBg = loadImage("general_instruction/instruction_page.jpg");
+  instructionBg = loadImage("/nine_lights_final/general_instruction/instruction_page.jpg");
 
   // Instruction video
-  instructionVid = createVideo("general_instruction/general_instruction.webm");
+  instructionVid = createVideo("/nine_lights_final/general_instruction/general_instruction.webm");
   instructionVid.hide();
   instructionVid.volume(0);
   instructionVid.attribute("muted", "");  // ⭐ 必须加！！！
