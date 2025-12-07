@@ -10,15 +10,23 @@ let instructionVid;
 let topBtnX, topBtnY, topBtnW, topBtnH;
 
 function preload() {
-  // Title page assets
+  // Title background
   bgTitle = loadImage("title_page/title.jpg");
+
+  // Title video
   logoVid = createVideo("title_page/title_page-1.webm");
   logoVid.hide();
+  logoVid.volume(0);
+  logoVid.attribute("muted", "");   // ⭐ 必须加！！！
 
-  // Instruction assets
+  // Instruction background
   instructionBg = loadImage("general_instruction/instruction_page.jpg");
+
+  // Instruction video
   instructionVid = createVideo("general_instruction/general_instruction.webm");
   instructionVid.hide();
+  instructionVid.volume(0);
+  instructionVid.attribute("muted", "");  // ⭐ 必须加！！！
 }
 
 function setup() {
@@ -50,10 +58,13 @@ function draw() {
 }
 
 function drawTitlePage() {
-  image(logoVid,
+  image(bgTitle, 0, 0, width, height);  // 背景先画
+
+  image(
+    logoVid,
     width / 2 - logoVid.width / 2,
-    height / 2 - logoVid.height / 2)
-  image(bgTitle, 0, 0, width, height);
+    height / 2 - logoVid.height / 2
+  );
 }
 
 function drawInstructionPage() {
@@ -96,7 +107,7 @@ if (
   mouseX > btnX && mouseX < btnX + btnW &&
   mouseY > btnY && mouseY < btnY + btnH
 ) {
-  window.location.href = "../ritual_01/index.html";
+  window.location.href = "ritual_01/index.html";
   return;
 }
   }
