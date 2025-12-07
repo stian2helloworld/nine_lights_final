@@ -180,6 +180,25 @@ function drawR1Instruction() {
   // rect(bottomBtnX, bottomBtnY, bottomBtnW, bottomBtnH);
 }
 
+// Keep only 2 most central hands
+function filterHands(handsArr) {
+  if (!handsArr || handsArr.length <= 2) return handsArr;
+
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  let scored = handsArr.map(hand => {
+    let wrist = hand.keypoints[0];
+    let dx = wrist.x - centerX;
+    let dy = wrist.y - centerY;
+    let distance = Math.sqrt(dx * dx + dy * dy);
+    return { hand, distance };
+  });
+
+  scored.sort((a, b) => a.distance - b.distance);
+  return [scored[0].hand, scored[1].hand];
+}
+
 // ====== Page: Action (Camera + HandPose) ======
 function drawR1Action() {
   background(0);
@@ -376,25 +395,6 @@ else if (appState === "r1_result") {
 }
 
 // ===== Hand Utility Functions =====
-
-// Keep only 2 most central hands
-function filterHands(handsArr) {
-  if (!handsArr || handsArr.length <= 2) return handsArr;
-
-  const centerX = width / 2;
-  const centerY = height / 2;
-
-  let scored = handsArr.map(hand => {
-    let wrist = hand.keypoints[0];
-    let dx = wrist.x - centerX;
-    let dy = wrist.y - centerY;
-    let distance = Math.sqrt(dx * dx + dy * dy);
-    return { hand, distance };
-  });
-
-  scored.sort((a, b) => a.distance - b.distance);
-  return [scored[0].hand, scored[1].hand];
-}
 
 // Select 2 hands closest to screen center
 function getDominantHandPair(handsArr) {
