@@ -51,8 +51,8 @@ function preload() {
   finalResultBg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/result_final.jpg");
 
   // Action 图标
-  pourWaterImg     = loadImage("/nine_lights_final/ritual_03/ritual03_images/pour_water.png");
-  waterDetectedImg = loadImage("/nine_lights_final/ritual_03/ritual03_images/water_detected.png");
+  pourWaterImg     = loadImage("/nine_lights_final/ritual_03/ritual_03_images/pour_water.png");
+  waterDetectedImg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/water_detected.png");
 }
 
 
