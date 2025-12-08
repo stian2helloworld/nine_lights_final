@@ -3,4 +3,10 @@ General progress:
 Stage 01: Brainstorm the key pages (e.g. title_page, instruction_page, action_page, transition_page, result_page)_ refer to Figma page (https://www.figma.com/board/splBNnHaltjQ4xOTOWBlfk/Hello-World-Final-Assignment?node-id=0-1&t=40p653GGNPAzIgFb-1)
 Stage 02: Design UI pages in Figma
 Stage 03: Exported elements and make animation in Adobe After Effects
-Stage 04: 
+Stage 04: Group all the static and animated game designs 
+Stage 05: Upload all the elements to p5js
+
+Elaboration more on stage 05:
+Problems I envountered:
+01. The system failed to filter the hands, especially when there were more than four hands inside the frame. The system had trouble distinguishing the main players
+02. The hand key points varied according to hand size, which sometimes meant that people could not pass the design- this problem even existed now
