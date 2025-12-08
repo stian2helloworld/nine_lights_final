@@ -184,81 +184,64 @@ function drawR2Action() {
   image(r2ActionBg, 0, 0, width, height);
   image(r2ActionVid, 0, 0, width, height);
 
- // ===== FFT 声音分析 =====
-  let spectrum = fft.analyze();
+// ===== FFT 声音分析 =====
+let spectrum = fft.analyze();
 
-  // 提高频段到 5000–9000 Hz，更贴近铃声
-  let rawEnergy = fft.getEnergy(5000, 9000);
+// 聚焦高频
+let highFreqEnergy = fft.getEnergy(2000, 8000);
 
-  // 平滑处理
-  let highFreqEnergy = lerp(prevHigh, rawEnergy, 0.25);
+// ===== 检测铃声音 =====
+let bellNow = highFreqEnergy > 95;
 
-  // spike 计算（必须在 prevHigh 更新前！）
-  let spike = highFreqEnergy - prevHigh;
+// ===== 稳定帧计数 =====
+if (bellNow) {
+  stableFrames++;
+} else {
+  stableFrames = 0;
+}
 
-  // 更新 previous 值
-  prevHigh = highFreqEnergy;
+// ===== 一次有效敲击 =====
+if (stableFrames >= 15) {
+  detectCount++;
+  stableFrames = 0;
+  console.log("🔔 valid ring:", detectCount);
+}
 
-  // ===== 铃声检测条件 =====
-  let bellNow = (highFreqEnergy > 130 && spike > 20);
+// ===== UI：提示图片（闪烁）=====
+let statusImg = bellNow ? r2SoundDetectedImg : r2RingBellImg;
 
-  // ===== 稳定帧计数 =====
-  if (bellNow) {
-    stableFrames++;
-  } else {
-    stableFrames = 0;
-  }
+let w = width * 0.30;
+let h = statusImg.height * (w / statusImg.width);
+let x = width / 2 - w / 2;
+let y = height - h - 40;
 
-  // ===== Ritual 完成条件 =====
-  if (stableFrames >= 15) {
-    detectCount++;
-    stableFrames = 0;
-    console.log("🔔 valid ring:", detectCount);
-  }
+if (frameCount % 60 < 30) {
+  image(statusImg, x, y, w, h);
+}
 
-  // ===== UI：提示图片（闪烁）=====
-  let statusImg = bellNow ? r2SoundDetectedImg : r2RingBellImg;
+// ===== 仪式完成：累计 7 次有效敲击 =====
+if (detectCount >= 7 && !bellTriggered) {
+  bellTriggered = true;
+  transitionStartTime = millis();
+  appState = "r2_transition";
+  return;
+}
 
-  let w = width * 0.30;
-  let h = statusImg.height * (w / statusImg.width);
-  let x = width / 2 - w / 2;
-  let y = height - h - 40;
-
-  if (frameCount % 60 < 30) {
-    image(statusImg, x, y, w, h);
-  }
-
-  // ===== Ritual 完成条件 =====
-  if (detectCount >= 5 && !bellTriggered) {
-    bellTriggered = true;
-    transitionStartTime = millis();
-    appState = "r2_transition";
-    return;
-  }
-
-  // ===== 下面是你不见的小蓝条 + HighFreq数字 =====
-
-  // 频率数字
-  // ===== 左下角两行 Frequency + Amount + 能量条 =====
-
-// 文字样式
+// ===== Debug UI =====
 fill(255);
 textSize(18);
 textAlign(LEFT, BOTTOM);
 
-// 第一行：Frequency
+// 数字展示
 text("Frequency: " + nf(highFreqEnergy, 1, 1), 40, height - 90);
-
-// 第二行：Amount（你要的）
 text("Amount: " + nf(highFreqEnergy, 1, 1), 40, height - 65);
 
-// 小蓝条
+// 蓝色能量条
 fill(100, 200, 255);
 noStroke();
-let barWidth = map(highFreqEnergy, 0, 255, 0, 180); // ⭐ 小一点
+let barWidth = map(highFreqEnergy, 0, 255, 0, 180);
 rect(40, height - 50, barWidth, 10);
-}
-
+  
 // =======================================================
 // PAGE 4 — TRANSITION
 // =======================================================
