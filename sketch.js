@@ -1,6 +1,6 @@
 let appState = "title";
 
-let bgTitleVid;   // ⭐ 改成 video
+let bgTitleVid;
 let logoVid;
 
 let btnX, btnY, btnW, btnH;
@@ -9,8 +9,14 @@ let instructionVid;
 
 let topBtnX, topBtnY, topBtnW, topBtnH;
 
+// ⭐ New — title page button image
+let titleBtnImg;
+let titleBtnW = 300;
+let titleBtnH = 120;
+let titleBtnX, titleBtnY;
+
 function preload() {
-  // ⭐ Title background VIDEO
+  // Title background VIDEO
   bgTitleVid = createVideo("/nine_lights_final/title_page/welcome_page.webm");
   bgTitleVid.hide();
   bgTitleVid.volume(0);
@@ -22,7 +28,10 @@ function preload() {
   logoVid.volume(0);
   logoVid.attribute("muted", "");
 
-  // Instruction background image
+  // ⭐ Load new button image
+  titleBtnImg = loadImage("/nine_lights_final/title_page/button_title_page.png");
+
+  // Instruction background
   instructionBg = loadImage("/nine_lights_final/general_instruction/instruction_page.jpg");
 
   // Instruction video
@@ -35,23 +44,27 @@ function preload() {
 function setup() {
   createCanvas(1080, 900);
 
-  // ⭐ Loop title background video
   bgTitleVid.loop();
-
   logoVid.loop();
   instructionVid.loop();
 
-  // Bottom button
+  // Invisible bottom button size ONLY for instruction page
   btnW = 300;
   btnH = 120;
   btnX = width / 2 - btnW / 2;
   btnY = height - 160;
 
-  // Left-top "back" button
+  // Back button
   topBtnW = 150;
   topBtnH = 150;
   topBtnX = 20;
   topBtnY = 20;
+
+  // ⭐ Position title-page button (bottom center)
+  titleBtnW = 300;
+  titleBtnH = 120;
+  titleBtnX = width / 2 - titleBtnW / 2;
+  titleBtnY = height - 180;
 }
 
 function draw() {
@@ -64,15 +77,18 @@ function draw() {
 }
 
 function drawTitlePage() {
-  // ⭐ 先放背景视频
+  // Background video
   image(bgTitleVid, 0, 0, width, height);
 
-  // 再放中间 logo 视频（如果需要）
+  // Logo video
   image(
     logoVid,
     width / 2 - logoVid.width / 2,
     height / 2 - logoVid.height / 2
   );
+
+  // ⭐ Draw the button image
+  image(titleBtnImg, titleBtnX, titleBtnY, titleBtnW, titleBtnH);
 }
 
 function drawInstructionPage() {
@@ -85,15 +101,18 @@ function drawInstructionPage() {
 }
 
 // --------------------------------------------------
-// ❤️ Unified Mouse Pressed — ALL LOGIC HERE ❤️
+// Unified Mouse Pressed
 // --------------------------------------------------
 function mousePressed() {
 
   // ===== TITLE PAGE =====
   if (appState === "title") {
-    if (mouseX > btnX && mouseX < btnX + btnW &&
-        mouseY > btnY && mouseY < btnY + btnH) {
 
+    // ⭐ Button image clickable area
+    if (
+      mouseX > titleBtnX && mouseX < titleBtnX + titleBtnW &&
+      mouseY > titleBtnY && mouseY < titleBtnY + titleBtnH
+    ) {
       appState = "instruction";
       return;
     }
@@ -103,9 +122,10 @@ function mousePressed() {
   else if (appState === "instruction") {
 
     // Top-left back button
-    if (mouseX > topBtnX && mouseX < topBtnX + topBtnW &&
-        mouseY > topBtnY && mouseY < topBtnY + topBtnH) {
-
+    if (
+      mouseX > topBtnX && mouseX < topBtnX + topBtnW &&
+      mouseY > topBtnY && mouseY < topBtnY + topBtnH
+    ) {
       appState = "title";
       return;
     }
