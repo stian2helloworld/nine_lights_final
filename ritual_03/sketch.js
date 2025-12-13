@@ -284,27 +284,27 @@ function mousePressed() {
     }
   }
 
-  // Final Page Buttons
-  if (appState === "final") {
+  // Final Page Buttons —— 在 result 状态下生效
+if (appState === "result") {
 
-    if (
-      mouseX > finalLeftBtn.x && mouseX < finalLeftBtn.x + finalLeftBtn.w &&
-      mouseY > finalLeftBtn.y && mouseY < finalLeftBtn.y + finalLeftBtn.h
-    ) {
-      clickSound.play();
-      window.location.href = "/nine_lights_final/index.html";
-      return;
-    }
-
-    if (
-      mouseX > finalRightBtn.x && mouseX < finalRightBtn.x + finalRightBtn.w &&
-      mouseY > finalRightBtn.y && mouseY < finalRightBtn.y + finalRightBtn.h
-    ) {
-      clickSound.play();
-      window.location.href = "/nine_lights_final/final_result/index.html";
-      return;
-    }
+  if (
+    mouseX > finalLeftBtn.x && mouseX < finalLeftBtn.x + finalLeftBtn.w &&
+    mouseY > finalLeftBtn.y && mouseY < finalLeftBtn.y + finalLeftBtn.h
+  ) {
+    clickSound.play();
+    window.location.href = "/nine_lights_final/index.html";
+    return;
   }
+
+  if (
+    mouseX > finalRightBtn.x && mouseX < finalRightBtn.x + finalRightBtn.w &&
+    mouseY > finalRightBtn.y && mouseY < finalRightBtn.y + finalRightBtn.h
+  ) {
+    clickSound.play();
+    window.location.href = "/nine_lights_final/final_result/index.html";
+    return;
+  }
+}
 }
 
 
