@@ -36,10 +36,6 @@ let pourWaterImg, waterDetectedImg;
 // Invisible bottom button height
 const btnHeight = 200;
 
-// Final page invisible buttons
-let finalLeftBtn  = { x: 60,  y: height - 200, w: 300, h: 160 };
-let finalRightBtn = { x: 720, y: height - 200, w: 300, h: 160 };
-
 // Transition timer
 let transStartTime = 0;
 
@@ -49,6 +45,10 @@ let finalStarted = false;
 // ESP32 Connect button
 let connectBtn;
 
+let finalBtnW = 300;
+let finalBtnH = 160;
+let finalLeftBtn;
+let finalRightBtn;
 
 // =====================================================
 // Preload
@@ -109,6 +109,21 @@ clickSound = loadSound("/nine_lights_final/ritual_03/audio_03/clicking_sound.mp3
 function setup() {
   createCanvas(1080, 900);
 
+  // ✅ FINAL RESULT BUTTONS（一定要在 setup 里）
+  finalLeftBtn = {
+    x: 60,
+    y: height - finalBtnH - 40,
+    w: finalBtnW,
+    h: finalBtnH
+  };
+
+  finalRightBtn = {
+    x: width - finalBtnW - 60,
+    y: height - finalBtnH - 40,
+    w: finalBtnW,
+    h: finalBtnH
+  };
+  
   // ESP32 Connect Button (small, bottom-left)
   connectBtn = createButton("Connect with esp 32");
   connectBtn.position(30, height - 100);
