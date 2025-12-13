@@ -29,7 +29,7 @@ let welcomeCoverTextImg;
 let soundDownImg;
 
 let coverStartTime = 0;
-let coverDuration = 5000; // 5s
+let coverDuration = 3000; // 3s
 let soundDownClicked = false;
 
 // ======================================
