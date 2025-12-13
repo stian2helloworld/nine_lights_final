@@ -63,14 +63,14 @@ function draw() {
 // --------------------------------------------------
 function mousePressed() {
 
-  // ⭐ FIRST CLICK：只解锁音频 + 隐藏 sound_up
+  // ⭐ FIRST CLICK：解锁音频（不 return！）
   if (!audioUnlocked) {
     userStartAudio();
     resultBGM.loop();
     resultBGM.setVolume(0.35);
     audioUnlocked = true;
-    soundUpVisible = false;   // ✅ sound_up 消失
-    return;                  
+    soundUpVisible = false;
+    // ❌ 不 return
   }
 
   // Left bottom → Title page
@@ -78,18 +78,18 @@ function mousePressed() {
     mouseX > leftBtn.x && mouseX < leftBtn.x + leftBtn.w &&
     mouseY > leftBtn.y && mouseY < leftBtn.y + leftBtn.h
   ) {
-    clickSound.play();
+    if (clickSound) clickSound.play();
     window.location.href = "/nine_lights_final/index.html";
     return;
   }
 
-  // Right bottom → Ritual 01
+  // Right bottom → ✅ Final Result page
   if (
     mouseX > rightBtn.x && mouseX < rightBtn.x + rightBtn.w &&
     mouseY > rightBtn.y && mouseY < rightBtn.y + rightBtn.h
   ) {
-    clickSound.play();
-    window.location.href = "/nine_lights_final/ritual_01/index.html";
+    if (clickSound) clickSound.play();
+    window.location.href = "/nine_lights_final/final_result/index.html";
     return;
   }
 }
