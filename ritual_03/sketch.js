@@ -22,6 +22,10 @@ let clickSound;
 
 let audioUnlocked = false;
 
+// ---------- Title Sound Prompt ----------
+let soundDownImg;
+let soundDownVisible = true;
+
 // ---------- Assets ----------
 let titleBg, instrBg, actionBg, finalBg;
 let titleVid, instrVid, actionVid;
@@ -55,6 +59,8 @@ waterBGM = loadSound("/nine_lights_final/ritual_03/audio_03/water_sound.mp3");
 transitionBGM = loadSound("/nine_lights_final/ritual_03/audio_03/transitional_sound.mp3");
 resultBGM = loadSound("/nine_lights_final/ritual_03/audio_03/result_page_03.mp3");
 clickSound = loadSound("/nine_lights_final/ritual_03/audio_03/clicking_sound.mp3");
+
+  soundDownImg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/sound_down.png");
 
   // Title
   titleBg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/ritual03_titlepage.jpg");
@@ -160,6 +166,13 @@ function draw() {
 function drawTitle() {
   background(titleBg);
   image(titleVid, 0, 0, width, height);
+
+  // 🔊 sound_down 提示（未解锁音频时显示）
+  if (!audioUnlocked && soundDownVisible) {
+    if (frameCount % 60 < 30) {   // 纯 blinking
+      image(soundDownImg, 0, 0, width, height);
+    }
+  }
 }
 
 function drawInstruction() {
@@ -248,15 +261,16 @@ function drawFinal() {
 // =====================================================
 function mousePressed() {
 
-  // ⭐ Title page: 任意点击一次 → 解锁并播放 water BGM
-  if (appState === "title") {
+  // ⭐ TITLE：第一次点击 sound_down → 只解锁音频，不做任何跳转
+  if (appState === "title" && !audioUnlocked) {
     startWaterBGM();
+    soundDownVisible = false;
+    return; // ⛔ 关键：直接中断，防止命中底部按钮
   }
 
-  // Bottom invisible button
+  // Bottom invisible button（只在音频已解锁后生效）
   if (mouseY > height - btnHeight) {
 
-    // 🔊 ADD: clicking sound（只有点到按钮区域才响）
     clickSound.play();
 
     if (appState === "title") {
@@ -273,26 +287,20 @@ function mousePressed() {
   // Final Page Buttons
   if (appState === "final") {
 
-    // Left Button → Back to title
     if (
       mouseX > finalLeftBtn.x && mouseX < finalLeftBtn.x + finalLeftBtn.w &&
       mouseY > finalLeftBtn.y && mouseY < finalLeftBtn.y + finalLeftBtn.h
     ) {
-      // 🔊 ADD
       clickSound.play();
-
       window.location.href = "/nine_lights_final/index.html";
       return;
     }
 
-    // Right Button → GitHub Project
     if (
       mouseX > finalRightBtn.x && mouseX < finalRightBtn.x + finalRightBtn.w &&
       mouseY > finalRightBtn.y && mouseY < finalRightBtn.y + finalRightBtn.h
     ) {
-      // 🔊 ADD
       clickSound.play();
-
       window.location.href = "/nine_lights_final/final_result/index.html";
       return;
     }
