@@ -55,49 +55,49 @@ let connectBtn;
 // =====================================================
 function preload() {
   // ----- SOUND -----
-waterBGM = loadSound("audio_03/water_sound.mp3");
-transitionBGM = loadSound("audio_03/transitional_sound.mp3");
-resultBGM = loadSound("audio_03/result_page_03.mp3");
-clickSound = loadSound("audio_03/clicking_sound.mp3");
+waterBGM = loadSound("/nine_lights_final/ritual_03/audio_03/water_sound.mp3");
+transitionBGM = loadSound("/nine_lights_final/ritual_03/audio_03/transitional_sound.mp3");
+resultBGM = loadSound("/nine_lights_final/ritual_03/audio_03/result_page_03.mp3");
+clickSound = loadSound("/nine_lights_final/ritual_03/audio_03/clicking_sound.mp3");
 
-  soundDownImg = loadImage("ritual_03_images/sound_down.png");
+  soundDownImg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/sound_down.png");
 
   // Title
-  titleBg = loadImage("ritual_03_images/ritual03_titlepage.jpg");
-  titleVid = createVideo("ritual_03_images/ritual_water_03.webm", () => {
+  titleBg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/ritual03_titlepage.jpg");
+  titleVid = createVideo("/nine_lights_final/ritual_03/ritual_03_images/ritual_water_03.webm", () => {
     titleVid.loop(); titleVid.volume(0); titleVid.hide();
   });
 
   // Instruction
-  instrBg = loadImage("ritual_03_images/ritual03_instructionpage.jpg");
-  instrVid = createVideo("ritual_03_images/water_ritual03_instruction.webm", () => {
+  instrBg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/ritual03_instructionpage.jpg");
+  instrVid = createVideo("/nine_lights_final/ritual_03/ritual_03_images/water_ritual03_instruction.webm", () => {
     instrVid.loop(); instrVid.volume(0); instrVid.hide();
   });
 
   // Action
-  actionBg = loadImage("ritual_03_images/ritual03_actionpage_.jpg");
-  actionVid = createVideo("ritual_03_images/water_action.webm", () => {
+  actionBg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/ritual03_actionpage_.jpg");
+  actionVid = createVideo("/nine_lights_final/ritual_03/ritual_03_images/water_action.webm", () => {
     actionVid.loop(); actionVid.volume(0); actionVid.hide();
   });
 
-  pourWaterImg = loadImage("ritual_03_images/pour_water.png");
-  waterDetectedImg = loadImage("ritual_03_images/water_detected.png");
+  pourWaterImg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/pour_water.png");
+  waterDetectedImg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/water_detected.png");
 
   // Transition
-  transBgVid = createVideo("ritual_03_images/cloud.webm", () => {
+  transBgVid = createVideo("/nine_lights_final/ritual_03/ritual_03_images/cloud.webm", () => {
     transBgVid.volume(0); transBgVid.hide();
   });
-  transFrameVid = createVideo("ritual_03_images/transitional_page03.webm", () => {
+  transFrameVid = createVideo("/nine_lights_final/ritual_03/ritual_03_images/transitional_page03.webm", () => {
     transFrameVid.volume(0); transFrameVid.hide();
   });
 
   // Final
-  finalBg = loadImage("ritual_03_images/ritual03_result.jpg");
+  finalBg = loadImage("/nine_lights_final/ritual_03/ritual_03_images/ritual03_result.jpg");
 
-  patternVid = createVideo("ritual_03_images/pattern_ritual03.webm", () => {
+  patternVid = createVideo("/nine_lights_final/ritual_03/ritual_03_images/pattern_ritual03.webm", () => {
     patternVid.volume(0); patternVid.hide();
   });
-  deerVid = createVideo("ritual_03_images/deer_motion03.webm", () => {
+  deerVid = createVideo("/nine_lights_final/ritual_03/ritual_03_images/deer_motion03.webm", () => {
     deerVid.volume(0); deerVid.hide();
   });
 }
