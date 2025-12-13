@@ -6,10 +6,11 @@ let finalVid;
 let finalBtnImg;
 
 let soundUpImg;
-let soundUpVisible = true;
+let showSoundUp = true;
 
 let resultBGM;
 let clickSound;
+
 let audioUnlocked = false;
 
 let leftBtn  = { x: 60,  y: 720, w: 300, h: 160 };
@@ -50,11 +51,9 @@ function draw() {
   image(finalVid, 0, 0, width, height);
   image(finalBtnImg, 0, 0);
 
-  // ⭐ sound_up blinking（未解锁音频时）
-  if (!audioUnlocked && soundUpVisible) {
-    if (frameCount % 60 < 30) {   // 纯 blinking
-      image(soundUpImg, 0, 0, width, height);
-    }
+  // ⭐ sound_up blinking（独立于音频）
+  if (showSoundUp && frameCount % 60 < 30) {
+    image(soundUpImg, 0, 0, width, height);
   }
 }
 
@@ -63,17 +62,20 @@ function draw() {
 // --------------------------------------------------
 function mousePressed() {
 
-  // ⭐ FIRST CLICK：解锁音频（不 return！）
+  // ⭐ 第一次点击：只负责解锁音频 + 关掉 sound_up
   if (!audioUnlocked) {
     userStartAudio();
     resultBGM.loop();
     resultBGM.setVolume(0.35);
+
     audioUnlocked = true;
-    soundUpVisible = false;
-    // ❌ 不 return
+    showSoundUp = false;
+
+    if (clickSound) clickSound.play(); // ✅ 现在一定有声音
+    return; // ⭐ 必须 return，避免误触按钮
   }
 
-  // Left bottom → Title page
+  // Left button → Home
   if (
     mouseX > leftBtn.x && mouseX < leftBtn.x + leftBtn.w &&
     mouseY > leftBtn.y && mouseY < leftBtn.y + leftBtn.h
@@ -83,13 +85,13 @@ function mousePressed() {
     return;
   }
 
-  // Right bottom → ✅ Final Result page
+  // Right button → Restart Rituals (或其他)
   if (
     mouseX > rightBtn.x && mouseX < rightBtn.x + rightBtn.w &&
     mouseY > rightBtn.y && mouseY < rightBtn.y + rightBtn.h
   ) {
     if (clickSound) clickSound.play();
-    window.location.href = "/nine_lights_final/final_result/index.html";
+    window.location.href = "/nine_lights_final/ritual_01/index.html";
     return;
   }
 }
