@@ -5,6 +5,16 @@ let video;
 let handPose;
 let hands = [];
 
+// ===== Audio =====
+let bgmR1;
+let clickSound;
+let transitionSound;
+let resultSound;
+
+let bgmStarted = false;
+let transitionSoundPlayed = false;
+let resultSoundStarted = false;
+
 let appState = "r1_title"; 
 // "r1_title", "r1_instruction", "r1_action", "r1_transition", "r1_result"
 
@@ -49,6 +59,11 @@ let transIconAngle = 0;
 
 // ===== Preload Assets & Model =====
 function preload() {
+  bgmR1 = loadSound("/nine_lights_final/ritual_01/audio_01/flower_offering.mp3");
+clickSound = loadSound("/nine_lights_final/ritual_01/audio_01/clicking_sound.mp3");
+transitionSound = loadSound("/nine_lights_final/ritual_01/audio_01/transitional_sound.mp3");
+resultSound = loadSound("/nine_lights_final/ritual_01/audio_01/result_page_01.mp3");
+
   r1TitleBg = loadImage("/nine_lights_final/ritual_01/ritual01_images/ritual01_first_page.jpg");
   r1InstrBg = loadImage("/nine_lights_final/ritual_01/ritual01_images/ritual01_instruction.jpg");
 
@@ -67,6 +82,10 @@ function preload() {
 // ===== Setup =====
 function setup() {
   createCanvas(1080, 900);
+  bgmR1.setVolume(0.35);
+clickSound.setVolume(0.6);
+transitionSound.setVolume(0.5);
+resultSound.setVolume(0.4);
 
   // Camera
   video = createCapture(VIDEO, { flipped: true });
@@ -127,6 +146,19 @@ r1PatternVid.speed(0.5);
   resultNextBtnH = 120;
   resultNextBtnX = width - resultNextBtnW - 60;
   resultNextBtnY = height - resultNextBtnH - 40;
+}
+
+function startBGM() {
+  if (!bgmStarted) {
+    userStartAudio();   // 解锁浏览器音频
+    bgmR1.loop();
+    bgmStarted = true;
+  }
+}
+
+function playClick() {
+  if (clickSound.isPlaying()) clickSound.stop();
+  clickSound.play();
 }
 
 // ===== Main Draw Loop =====
@@ -271,11 +303,23 @@ function drawR1Action() {
 
   // When fully charged, go to transitional page
   if (!gestureConfirmed && gestureHoldFrames >= HOLD_TARGET_FRAMES) {
-    gestureConfirmed = true;
-    appState = "r1_transition";
-    transitionStartTime = millis();
-    return;
+  gestureConfirmed = true;
+
+  // 🔊 ADD — 停止 BGM
+  if (bgmR1 && bgmR1.isPlaying()) {
+    bgmR1.stop();
   }
+
+  // 🔊 ADD — 播放 transition sound（只一次）
+  if (!transitionSoundPlayed) {
+    transitionSound.play();
+    transitionSoundPlayed = true;
+  }
+
+  appState = "r1_transition";
+  transitionStartTime = millis();
+  return;
+}
 
   // ===== 底部 UI：提示图片 + 百分比条 =====
 
@@ -356,8 +400,17 @@ function drawR1Transition() {
 
   // 计时自动跳转到 result page
   if (millis() - transitionStartTime > 6000) {
-    appState = "r1_result";
-  }
+  appState = "r1_result";
+
+  bgmR1.stop();
+
+ if (!resultSoundStarted) {
+  resultSound.setVolume(0);
+  resultSound.loop();
+  resultSound.fade(0.35, 2); // 2 秒淡入
+  resultSoundStarted = true;
+}
+}
 }
 
 // ====== Page: Result ======
@@ -380,24 +433,35 @@ function drawR1Result() {
 
 // ===== Mouse Interaction =====
 function mousePressed() {
+
   // --- Title → Instruction (bottom center) ---
   if (appState === "r1_title") {
-    if (
-      mouseX > bottomBtnX && mouseX < bottomBtnX + bottomBtnW &&
-      mouseY > bottomBtnY && mouseY < bottomBtnY + bottomBtnH
-    ) {
-      appState = "r1_instruction";
-      return;
-    }
+
+  // ⭐ 1️⃣ 任意点击：只负责解锁并启动 BGM（不出声）
+  startBGM();
+
+  // ⭐ 2️⃣ 只有点到 invisible button 才有 click sound + 跳页
+  if (
+    mouseX > bottomBtnX && mouseX < bottomBtnX + bottomBtnW &&
+    mouseY > bottomBtnY && mouseY < bottomBtnY + bottomBtnH
+  ) {
+    playClick();                 // 🔊 只有这里有 clicking sound
+    appState = "r1_instruction";
+    return;
   }
+}
 
   // --- Instruction ---
   else if (appState === "r1_instruction") {
+
     // Left-side back button → title
     if (
       mouseX > instrBackBtnX && mouseX < instrBackBtnX + instrBackBtnW &&
       mouseY > instrBackBtnY && mouseY < instrBackBtnY + instrBackBtnH
     ) {
+      // 🔊 ADD
+      playClick();
+
       appState = "r1_title";
       return;
     }
@@ -407,6 +471,9 @@ function mousePressed() {
       mouseX > bottomBtnX && mouseX < bottomBtnX + bottomBtnW &&
       mouseY > bottomBtnY && mouseY < bottomBtnY + bottomBtnH
     ) {
+      // 🔊 ADD
+      playClick();
+
       gestureHoldFrames = 0;
       gestureConfirmed = false;
       appState = "r1_action";
@@ -414,27 +481,33 @@ function mousePressed() {
     }
   }
 
- // --- Result page buttons ---
-else if (appState === "r1_result") {
+  // --- Result page buttons ---
+  else if (appState === "r1_result") {
 
-  // ⭐ Left-bottom → back to STARTER title page
-  if (
-    mouseX > resultHomeBtnX && mouseX < resultHomeBtnX + resultHomeBtnW &&
-    mouseY > resultHomeBtnY && mouseY < resultHomeBtnY + resultHomeBtnH
-  ) {
-    window.location.href = "/nine_lights_final/index.html";
-    return;
-  }
+    // ⭐ Left-bottom → back to STARTER title page
+    if (
+      mouseX > resultHomeBtnX && mouseX < resultHomeBtnX + resultHomeBtnW &&
+      mouseY > resultHomeBtnY && mouseY < resultHomeBtnY + resultHomeBtnH
+    ) {
+      // 🔊 ADD
+      playClick();
 
-  // ⭐ Right-bottom → go to Ritual 02
-  if (
-    mouseX > resultNextBtnX && mouseX < resultNextBtnX + resultNextBtnW &&
-    mouseY > resultNextBtnY && mouseY < resultNextBtnY + resultNextBtnH
-  ) {
-    window.location.href = "/nine_lights_final/ritual_02/index.html";
-    return;
+      window.location.href = "/nine_lights_final/index.html";
+      return;
+    }
+
+    // ⭐ Right-bottom → go to Ritual 02
+    if (
+      mouseX > resultNextBtnX && mouseX < resultNextBtnX + resultNextBtnW &&
+      mouseY > resultNextBtnY && mouseY < resultNextBtnY + resultNextBtnH
+    ) {
+      // 🔊 ADD
+      playClick();
+
+      window.location.href = "/nine_lights_final/ritual_02/index.html";
+      return;
+    }
   }
-}
 
 // ===== Hand Utility Functions =====
 }
