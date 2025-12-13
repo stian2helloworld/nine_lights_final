@@ -15,6 +15,10 @@ let bgmStarted = false;
 let transitionSoundPlayed = false;
 let resultSoundStarted = false;
 
+// ===== Title Sound Prompt =====
+let soundDownImg;
+let soundDownVisible = true;
+
 // State Machine
 let appState = "r2_title";
 // Pages: "r2_title", "r2_instruction", "r2_action", "r2_transition", "r2_result"
@@ -70,6 +74,8 @@ clickSound = loadSound("/nine_lights_final/ritual_02/audio_02/clicking_sound.mp3
 transitionSound = loadSound("/nine_lights_final/ritual_02/audio_02/transitional_sound.mp3");
 resultSound = loadSound("/nine_lights_final/ritual_02/audio_02/result_page_02.mp3");
   
+  soundDownImg = loadImage("/nine_lights_final/ritual_02/ritual02_images/sound_down.png");
+
   // Title
   r2TitleBg = loadImage("/nine_lights_final/ritual_02/ritual02_images/ritual02_bgpage.jpg");
 
@@ -192,6 +198,13 @@ function drawR2Title() {
 
   // center video
   image(r2TitleVid, width/2 - r2TitleVid.width/2, height/2 - r2TitleVid.height/2);
+  
+  // 🔊 sound_down 提示（未启动 BGM 时显示）
+  if (!bgmStarted && soundDownVisible) {
+    if (frameCount % 60 < 30) {   // 纯 blinking，无渐变
+      image(soundDownImg, 0, 0, width, height);
+    }
+  }
 }
 
 
@@ -257,13 +270,13 @@ if (frameCount % 60 < 30) {
 }
 
 // ===== 仪式完成：累计 7 次有效敲击 =====
-if (detectCount >= 7 && !bellTriggered) {
+if (detectCount >= 3 && !bellTriggered) {
   bellTriggered = true;
   bellCompletedTime = millis();   // ⭐ 记录完成时间（停留在当前页）
 }
 
 // ===== 铃声完成后停留 3 秒再跳转 =====
-if (bellTriggered && millis() - bellCompletedTime > 2000) {
+if (bellTriggered && millis() - bellCompletedTime > 1000) {
 
   // 🔊 停止 BGM
   stopBGM();
@@ -342,20 +355,22 @@ function mousePressed() {
   // --- TITLE → INSTRUCTION ---
   if (appState === "r2_title") {
 
-    // ⭐ 任意第一次点击：解锁音频并启动 BGM（不出 click 声）
+  // ⭐ 任意第一次点击：解锁音频 + 隐藏 sound_down
+  if (!bgmStarted) {
     startBGM();
-
-    if (
-      mouseX > bottomBtnX && mouseX < bottomBtnX + bottomBtnW &&
-      mouseY > bottomBtnY && mouseY < bottomBtnY + bottomBtnH
-    ) {
-      // 🔊 ADD：只有点到 invisible button 才有 click 声
-      playClick();
-
-      appState = "r2_instruction";
-      return;
-    }
+    soundDownVisible = false;   // ✅ 这一行
   }
+
+  // ⭐ 只有点到 invisible button 才有 click 声
+  if (
+    mouseX > bottomBtnX && mouseX < bottomBtnX + bottomBtnW &&
+    mouseY > bottomBtnY && mouseY < bottomBtnY + bottomBtnH
+  ) {
+    playClick();
+    appState = "r2_instruction";
+    return;
+  }
+}
 
   // --- INSTRUCTION → ACTION ---
   else if (appState === "r2_instruction") {
