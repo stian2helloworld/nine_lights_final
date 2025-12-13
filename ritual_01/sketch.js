@@ -522,6 +522,4 @@ function mousePressed() {
       return;
     }
   }
-
-// ===== Hand Utility Functions =====
 }
