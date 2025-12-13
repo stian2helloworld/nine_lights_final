@@ -20,7 +20,7 @@ let appState = "r1_title";
 
 // ===== Title Sound Prompt =====
 let soundDownImg;
-let soundDownVisible = true;   // 是否显示提示
+let soundDownVisible = true;   
 
 // --- Images & Videos ---
 // Title
