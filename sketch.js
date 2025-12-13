@@ -52,31 +52,31 @@ let soundDownClicked = false;
 function preload() {
 
   // ----- Audio -----
-  welcomeSound = loadSound("audio/welcome_page_.mp3");
-  clickSound = loadSound("audio/clicking_sound.mp3");
+  welcomeSound = loadSound("/nine_lights_final/audio/welcome_page_.mp3");
+  clickSound = loadSound("/nine_lights_final/audio/clicking_sound.mp3");
 
   // ----- Welcome cover -----
-welcomeCoverImg = loadImage("title_page/welcome_cover.png");
-welcomeCoverTextImg = loadImage("title_page/welcome_cover_text.png");
-soundDownImg = loadImage("title_page/sound_down.png");
+welcomeCoverImg = loadImage("/nine_lights_final/title_page/welcome_cover.png");
+welcomeCoverTextImg = loadImage("/nine_lights_final/title_page/welcome_cover_text.png");
+soundDownImg = loadImage("/nine_lights_final/title_page/sound_down.png");
 
   // ----- Title page -----
-  bgTitleVid = createVideo("title_page/welcome_page.webm");
+  bgTitleVid = createVideo("/nine_lights_final/title_page/welcome_page.webm");
   bgTitleVid.hide();
   bgTitleVid.volume(0);
   bgTitleVid.attribute("muted", "");
 
-  logoVid = createVideo("title_page/title_page.webm");
+  logoVid = createVideo("/nine_lights_final/title_page/title_page.webm");
   logoVid.hide();
   logoVid.volume(0);
   logoVid.attribute("muted", "");
 
-  titleBtnImg = loadImage("title_page/button_title_page.png");
+  titleBtnImg = loadImage("/nine_lights_final/title_page/button_title_page.png");
 
   // ----- Instruction page -----
-  instructionBg = loadImage("general_instruction/instruction_page.jpg");
+  instructionBg = loadImage("/nine_lights_final/general_instruction/instruction_page.jpg");
 
-  instructionVid = createVideo("general_instruction/general_instruction.webm");
+  instructionVid = createVideo("/nine_lights_final/general_instruction/general_instruction.webm");
   instructionVid.hide();
   instructionVid.volume(0);
   instructionVid.attribute("muted", "");
