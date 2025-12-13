@@ -12,13 +12,13 @@ let rightBtn = { x: 720, y: 720, w: 300, h: 160 };  // → Ritual 01
 
 function preload() {
   // Main looping video
-  finalVid = createVideo("final_result/final_reuslt_.webm");
+  finalVid = createVideo("/nine_lights_final/final_result/final_result_/final_reuslt_.webm");
   finalVid.hide();
   finalVid.volume(0);
   finalVid.attribute("muted", "");
 
   // UI overlay (full size 1080×900)
-  finalBtnImg = loadImage("final_result/bg_final_button.png");
+  finalBtnImg = loadImage("/nine_lights_final/final_result/final_result_/bg_final_button.png");
 }
 
 function setup() {
