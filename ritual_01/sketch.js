@@ -87,10 +87,6 @@ resultSound = loadSound("/nine_lights_final/ritual_01/audio_01/result_page_01.mp
 // ===== Setup =====
 function setup() {
   createCanvas(1080, 900);
-  bgmR1.setVolume(0.35);
-clickSound.setVolume(0.6);
-transitionSound.setVolume(0.5);
-resultSound.setVolume(0.4);
 
   // Camera
   video = createCapture(VIDEO, { flipped: true });
@@ -154,15 +150,28 @@ r1PatternVid.speed(0.5);
 }
 
 function startBGM() {
-  if (!bgmStarted) {
-    userStartAudio();   // 解锁浏览器音频
+  userStartAudio(); // 🔓 一定先解锁（多次调用没关系）
+
+  if (!bgmStarted && bgmR1) {
+    bgmR1.setVolume(0.35);
     bgmR1.loop();
     bgmStarted = true;
   }
+
+  if (transitionSound) transitionSound.setVolume(0.5);
+  if (resultSound)     resultSound.setVolume(0.4);
+  if (clickSound)      clickSound.setVolume(0.6);
 }
 
 function playClick() {
-  if (clickSound.isPlaying()) clickSound.stop();
+  userStartAudio(); // 🔓 防止用户先点按钮
+
+  if (!clickSound) return;
+
+  if (clickSound.isPlaying()) {
+    clickSound.stop();
+  }
+
   clickSound.play();
 }
 
