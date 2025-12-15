@@ -1,22 +1,2 @@
-* Code creation progress for Gesture Ritual_01_
-General progress: 
-Stage 01: Brainstorm the key pages (e.g. title_page, instruction_page, action_page, transition_page, result_page)_ refer to Figma page (https://www.figma.com/board/splBNnHaltjQ4xOTOWBlfk/Hello-World-Final-Assignment?node-id=0-1&t=40p653GGNPAzIgFb-1)
-Stage 02: Design UI pages in Figma
-Stage 03: Exported elements and make animation in Adobe After Effects
-Stage 04: Group all the static and animated game designs 
-Stage 05: Upload all the elements to p5js
-
-Elaboration more on stage 05:
-Problems I envountered:
-01. The system failed to filter the hands, especially when there were more than four hands inside the frame. The system had trouble distinguishing the main players
-02. The hand key points varied according to hand size, which sometimes meant that people could not pass the design- this problem even existed now
-
-* Code creation progress for Gesture Ritual_02_
-Problem I encountered: 
-01_ I tried to connect teachable machine with the p5js, and my aim is to ask the teachable machine to distinguish the bell sound and the background noise, but I failed to do so
-02_ The failure leads me to try to work with p5js sound classification, and set the sound frequency to a exact amount to trigger the next pages
-
-* Code creation progress for Water Ritual_03_
-Problem I encountered: 
-01_ I tried to use WebSerial to connect the p5js with the Arduino Nano Esp 32
-02_ Sometimes I connected the 
+Please refer to my week 02's journal on Figma_
+https://www.figma.com/proto/P2X9HAHcyQK9RX5yx7c4Pl/Week-02_Ritual_01?page-id=0%3A1&node-id=1-2&viewport=196%2C358%2C0.28&t=gmIyXphGuqtajVKS-1&scaling=contain&content-scaling=fixed
